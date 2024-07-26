@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"unsafe"
 )
 
@@ -78,4 +79,32 @@ func main() {
 	`
 
 	fmt.Printf("The variable value is: %s\n ", myString2)
+
+	// Scope
+	{
+		fmt.Println()
+		floatVar := 33.11
+		fmt.Printf("type: %T, value: %f\n", floatVar, floatVar)
+		floatStrVar := fmt.Sprintf("%f", floatVar) // Sprintf nos retorna un string
+		fmt.Printf("type: %T, value: %s\n", floatStrVar, floatStrVar)
+
+		intVar := 22
+		fmt.Printf("type: %T, value: %d\n", intVar, intVar)
+		intStrVar := fmt.Sprintf("%d", intVar) // Sprintf nos retorna un string
+		fmt.Printf("type: %T, value: %s\n", intStrVar, intStrVar)
+
+		intVal1, err := strconv.ParseInt("1333", 0, 64)
+		fmt.Println(err) // retorna nill, que representa el null
+		fmt.Printf("type: %T, value: %d\n", intVal1, intVal1)
+
+		intVal2, err := strconv.ParseInt("aa1333", 0, 64) // valor errado que termina setenado la variable en 0 con mensaje de error
+		fmt.Println(err)
+		fmt.Printf("type: %T, value: %d\n", intVal2, intVal2)
+
+		// si no quiero usar el error, puedo emplear un guion bajo
+
+		floatVar1, _ := strconv.ParseFloat("-11.2", 64)
+		fmt.Printf("Type: %T, value: %f\n", floatVar1, floatVar1)
+
+	}
 }
